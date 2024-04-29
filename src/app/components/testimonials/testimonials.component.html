@@ -1,0 +1,46 @@
+<div class="flex flex-col mt-10 mb-10 justify-center items-center">
+    <div class=" relative bg-gradient-to-t from-brand-primaryBlue to-brand-primaryPurple w-36 h-5 sm:w-60 sm:h-10 sm:p-4 rounded-full">
+        <div class="absolute bg-black inset-1 rounded-full flex justify-center items-center text-xl text-Neutrals/neutrals-6">
+            Testimonials    
+        </div>
+    </div>
+
+    <div class="w-1/2">
+        <h1 class="my-4 text-5xl font-semibold text-Neutrals/neutrals-6 text-center">Trusted by all</h1>
+    </div>
+
+    <div class="w-1/3">
+        <p class=" text-Neutrals/neutrals-6 text-center">Join thousands of satisfied users who rely on our platform for their personal and professional productivity needs.</p>
+    </div>
+
+    
+    <!-- calender -->
+
+   
+</div>
+    
+
+
+
+
+<div class="flex flex-wrap ">
+    <div class="h-52 w-1/4 mx-5 my-3 p-3 bg-gradient-to-t from-slate-900 to-slate-950 rounded-xl border-2 border-slate-900" *ngFor="let item of USERS, let i=index">
+
+        <div>
+           
+            <app-avatar
+               
+               [name]="item.name"
+               [role]="item.name"
+               [imageUrl]="'../../../assets/avatars/' + (i+1) + '.png'"
+                
+            ></app-avatar>
+        </div>
+        <div class="my-3">
+
+            <p class="text-Neutrals/neutrals-6">{{item.message}}</p>
+        </div>
+        
+    </div>
+</div>
+
