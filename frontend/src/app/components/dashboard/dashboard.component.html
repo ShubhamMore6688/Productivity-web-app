@@ -1,0 +1,144 @@
+<div class="h-full w-full flex">
+    <!-- left container  -->
+    <div class="bg-black w-1/5 h-screen text-gray-500 flex flex-col justify-between ">
+        <div>
+            <div class="flex items-center m-2 h-10">
+                <img src="../../../assets/images/cypresslogo.svg" alt="">
+                <h3 class="mx-2 text-xl font-bold text-Neutrals/neutrals-6">FocusFuse</h3>
+               </div>
+               <div class="ml-3">
+                    <div class="my-1 mt-4"><i class="fa-solid fa-house mx-2"></i>My Workspace</div>
+                    <div class="my-1"><i class="fa-solid fa-gear mx-2"></i>Setting</div>
+                    <div class="my-1"><i class="fa-solid fa-trash mx-2"></i>Trash</div>
+        
+               </div>
+               <div class="mx-3 my-3 text-xs text-gray-700 font-bold flex justify-around items-center">
+                <div class="w-3/5">
+                    FOLDERS
+                </div>
+                <div>
+                    <i (click)="fileCreation(fileName, fileContent)" class="fa-regular fa-file mx-3 text-lg hover:text-gray-200"></i>
+                    <i (click)="folderCreation(folderName)" class="fa-solid fa-folder text-lg hover:text-gray-200"></i>
+                </div>
+               </div>
+
+            <div class="ml-3 cursor-pointer">
+                <div class="my-1" id="test1" (click)="onFileSelect($event)"><span>👩‍💻</span>  Test1</div>
+                <div class="my-1" id="test2" (click)="onFileSelect($event)"><span>💼</span>  Test2</div>
+                <div class="my-1" id="test3" (click)="onFileSelect($event)"><span>🤵</span>  Test3</div>
+
+                <div *ngFor="let item of Files">
+                    <ul>
+                        <li><div class="my-1" id="test3" (click)="onFileSelect($event)"><span>🤵</span>{{item.name}}</div></li>
+                    </ul>
+                </div>
+                
+    
+           </div>
+        </div>
+       <div>
+        <div class="h-16 rounded-full mx-4 my-3 bg- flex justify-around items-center bg-primary-purple-900 bg-opacity-50">
+            <app-avatar [name]="name" [role]="role" [imageUrl]="'../../../assets/avatars/1.png '"></app-avatar>
+            <div routerLink="/">
+                <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
+            </div>
+        </div>
+       </div>
+
+       
+       
+    </div>
+    <!-- right container -->
+    <div class=" h-screen w-4/5 flex flex-col">
+        <div class="h-10 w-full flex justify-end my-2">
+            <div>
+                <button (click)="handleBanner()">+</button>
+            </div>
+            <div class="mr-4 cursor-pointer" (click)="viewProfile()">
+                <app-avatar [name]="''" [role]="''" [imageUrl]="'../../../assets/avatars/1.png '"></app-avatar>
+            </div>
+
+            <!-- view profile when clicked on this div -->
+            <ng-container *ngIf="seeProfile">
+                <ng-container *ngTemplateOutlet="profile"></ng-container>
+            </ng-container>
+
+            <!-- template for the profile -->
+            <ng-template #profile>
+                <div class="fixed h-52 w-44 mt-12 mr-7 px-4  flex flex-col justify-around text-Neutrals/neutrals-6 rounded-md backdrop-blur-3xl  bg-gradient-to-t from-washed-purple-800 to-background-clr ">
+                    <div class="flex flex-col justify-center items-center">
+                        <h3 class="text-xl">{{name}}</h3>
+                        <h3 class="text-gray-500">{{role}}</h3>
+                    </div>
+                    <div>
+                        
+                    </div>
+                    <div routerLink="/" class="h-10 cursor-pointer bg-primary-purple-900 rounded-xl flex justify-center items-center">
+                        <span class="mx-2 font-bold">Logout</span>
+                        <i class="fa-solid fa-arrow-right-from-bracket text-xl"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+
+            <!-- <ckeditor [(ngModel)]="text" [config]="editorConfig"></ckeditor> -->
+            <!-- <p-editor [(ngModel)]="text" [style]="{ height: '320px' }"></p-editor> -->
+            <!-- <quill-editor [(ngModel)]="editorContent" [style]="{ height: '320px' }"></quill-editor> -->
+            <ng-container *ngIf="banner">
+                <ng-container *ngTemplateOutlet="data"></ng-container>
+            </ng-container>
+            <ng-template #data>
+                <div class="h-28 overflow-hidden object-cover">
+                    <img src="../../../assets/images/banner.jpg" alt="">
+                </div>
+            </ng-template>
+
+            <div class=" h-80 w-2/3 my-5 overflow-y-auto hide-scrollbar">
+                <span class="h-20 w-20 text-6xl mx-3 cursor-pointer" (click)="changeEmoji()">{{selectedEmoji}}</span>
+
+                <div>
+                    <app-emoji-picker class="h-10 w-10" *ngIf="changeEmj" (selectedEmoji)="getSelectedEmoji($event)"></app-emoji-picker>
+                </div>
+                  
+
+                
+                <!-- banner upload and remove button  -->
+                <div class="text-Neutrals/neutrals-6 flex mx-3 my-4 cursor-pointer">
+                    <div class="mx-2"><p>Upload Banner</p></div>
+                    <div class="mx-2" (click)="removeBanner()"><p>Remove Banner</p></div>
+                </div>
+
+                <div class="mx-3 text-Neutrals/neutrals-6">
+                    <h1 class="text-3xl font-semibold">{{secondPart}}</h1>
+                    <span>WORKSPACE </span>
+                </div>
+                <div class="flex justify-center items-center  text-justify m-4 text-Neutrals/neutrals-6">
+                    <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa ducimus illo, impedit, dolor mollitia minus aliquid vero vel, laudantium est dicta nam consequatur excepturi? Possimus dolores laboriosam reiciendis dignissimos commodi enim assumenda fugit esse natus excepturi, alias expedita accusantium nemo doloremque eveniet consectetur? Facilis doloremque ullam porro alias quae sit ex voluptate quisquam minima quaerat quos cum deleniti, deserunt impedit ipsa dolor. Accusantium itaque ea ipsa, officiis quod quibusdam odit repellendus eos sunt fugit facilis repellat. Repudiandae iusto aliquam necessitatibus velit ut cum amet, saepe quasi consequatur quos iste voluptatum sapiente commodi sint cupiditate perspiciatis beatae ratione officiis ipsa. Sapiente maiores atque tempora quae esse totam, eligendi omnis, deleniti provident cupiditate nisi officiis architecto quibusdam similique cumque suscipit fugit quas eos a dolorum distinctio laboriosam beatae. Iure ipsum commodi consequatur rerum ut ratione vero pariatur esse nobis voluptas, quis voluptatem id eum consequuntur possimus minima corporis dolor officiis nostrum, animi iste sequi fugit itaque non. Dolore, aliquid libero mollitia eos exercitationem architecto enim provident esse itaque corporis similique veritatis. Odit reiciendis dolore excepturi expedita. Voluptatum et a sapiente quibusdam nihil, quasi perspiciatis ad. Consequatur officiis sunt tenetur labore, sed nam ex totam deserunt maiores omnis nostrum, nemo illum aliquam beatae!</p>
+                     -->
+                     <div class="w-full">
+
+                         <app-text-editor class="w-full text-gray-700"></app-text-editor>
+                     </div>
+                </div>
+
+
+                <!-- file and folder creation -->
+                <div class="flex flex-col mx-5">
+
+                    <input type="text" class="my-3" [(ngModel)]="fileName" placeholder="Enter the file name">
+                    <input type="text" [(ngModel)]="fileContent" placeholder="Enter the content for the file">
+                    <button >create file</button>
+
+                    <input type="text" [(ngModel)]="folderName" placeholder="Enter the folder name">
+                    <button >create folder</button>
+                </div>
+
+                <!-- display files -->
+                
+            </div>
+
+
+        </div>
+    </div>
+</div>
