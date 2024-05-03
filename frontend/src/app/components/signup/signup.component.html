@@ -12,17 +12,20 @@
             <p>An all-in-One Collaboration and productivity Platform</p>
         </div>
         <div class="w-full flex justify-center">
-            <input class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Email" type="email" name="email">
+            <input [(ngModel)]="email" class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Email" type="email" name="email">
         </div>
         <div class="w-full flex justify-center">
-            <input class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Password" type="password" name="password">
+            <input [(ngModel)]="password" class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Password" type="password" name="password">
         </div>
         <div class="w-full flex justify-center">
             <input class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Confirm Password" type="password" name="password">
         </div>
-        <div routerLink="/Dashboard" class="w-80 h-10 my-3 cursor-pointer rounded flex justify-center items-center text-xl font-bold bg-brand-primaryPurple">
+        <button (click)="createAccount(email, password)" class="w-80 h-10 my-3 cursor-pointer rounded flex justify-center items-center text-xl font-bold bg-brand-primaryPurple">
             Create Account
-        </div>
+            <!-- routerLink="/Dashboard"  -->
+        </button>
+
+        
         <div>
             Already have an account? <span routerLink="/Login" class="text-brand-primaryPurple cursor-pointer">Login</span>
         </div>
