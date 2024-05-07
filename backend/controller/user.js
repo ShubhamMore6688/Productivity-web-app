@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { User } from "../models/user.js";
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 export const register = async (req, res) => {
     const {email, password} = req.body;
@@ -12,13 +14,15 @@ export const register = async (req, res) => {
             message: "User is already registered"
         })
     }
-
+    const encryPassword = await bcrypt.hash(password, 10);
     user = await User.create({
         email, 
-        password
+        password: encryPassword
     })
-    
-    res.status(200).json({
+    const token = jwt.sign({_id: user._id}, "kfdjsklfdfjdfkajdsfkjad");
+    res.status(200).cookie("token", token, {
+        httpOnly: true
+    }).json({
         success: true,
         message: "User registerd successfully"
     })
@@ -31,14 +35,18 @@ export const login = async (req,res) => {
     let user = await User.findOne({email});
 
     if(user){
-        if(user.password !== password){
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if(!isPasswordMatch){
             return res.status(404).json({
                 success: false,
                 message: "Password is incorrect"
             })
         }
-
-        res.status(200).json({
+        const token = jwt.sign({_id: user._id}, "kfdjsklfdfjdfkajdsfkjad");
+        console.log(token)
+        res.status(200).cookie("token", token, {
+            httpOnly: true
+        }).json({
             success: true,
             message: "login successfull"
         })

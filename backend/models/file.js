@@ -1,11 +1,11 @@
 import mongoose, { Schema } from "mongoose";
 
 const fileSchema = mongoose.Schema({
-    name: {
+    filename: {
         type: String,
     },
 
-    content: {
+    filecontent: {
         type: String
     }, 
 

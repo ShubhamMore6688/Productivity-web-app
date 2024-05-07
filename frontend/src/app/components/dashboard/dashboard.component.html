@@ -14,18 +14,25 @@
                </div>
                <div class="mx-3 my-3 text-xs text-gray-700 font-bold flex justify-around items-center">
                 <div class="w-3/5">
-                    FOLDERS
+                    FILES
                 </div>
                 <div>
-                    <i (click)="fileCreation(fileName, fileContent)" class="fa-regular fa-file mx-3 text-lg hover:text-gray-200"></i>
-                    <i (click)="folderCreation(folderName)" class="fa-solid fa-folder text-lg hover:text-gray-200"></i>
+                    <i (click)="fileCreation()" class="fa-regular fa-file mx-3 text-lg hover:text-gray-200"></i>
+                    <!-- <i (click)="folderCreation(folderName)" class="fa-solid fa-folder text-lg hover:text-gray-200"></i> -->
                 </div>
                </div>
 
             <div class="ml-3 cursor-pointer">
-                <div class="my-1" id="test1" (click)="onFileSelect($event)"><span>👩‍💻</span>  Test1</div>
+                <ng-template [ngIf]="createFile">
+                    <div class="my-1"><input #filename (change)="updateFileName(filename.value, content.value)" class="w-full bg-black border-1 border-slate-50" type="text"></div>
+                </ng-template>
+                <div class="my-1" id="test1" (click)="onFileSelect($event, file.filename, emoji.textContent) " *ngFor="let file of Files">
+                    <span #emoji class="mr-2">{{selectedEmoji}}</span>{{ file.filename}}
+                </div>
+
+                <!-- <div class="my-1" id="test1" (click)="onFileSelect($event)"><span>👩‍💻</span>  Test1</div>
                 <div class="my-1" id="test2" (click)="onFileSelect($event)"><span>💼</span>  Test2</div>
-                <div class="my-1" id="test3" (click)="onFileSelect($event)"><span>🤵</span>  Test3</div>
+                <div class="my-1" id="test3" (click)="onFileSelect($event)"><span>🤵</span>  Test3</div> -->
 <!-- 
                 <div *ngFor="let item of Files">
                     <ul>
@@ -96,6 +103,7 @@
 
             <div class=" h-80 w-2/3 my-5 overflow-y-auto hide-scrollbar">
                 <span class="h-20 w-20 text-6xl mx-3 cursor-pointer" (click)="changeEmoji()">{{selectedEmoji}}</span>
+                <span class="h-20 w-20 text-6xl mx-3 cursor-pointer" (click)="changeEmoji()">{{secondPart}}</span>
 
                 <div>
                     <app-emoji-picker class="h-10 w-10" *ngIf="changeEmj" (selectedEmoji)="getSelectedEmoji($event)"></app-emoji-picker>
@@ -112,29 +120,21 @@
                 <div class="mx-3 text-Neutrals/neutrals-6">
                     <h1 class="text-3xl font-semibold">{{secondPart}}</h1>
                     <span>WORKSPACE </span>
+                   
                 </div>
                 <div class="flex justify-center items-center  text-justify m-4 text-Neutrals/neutrals-6">
                     <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa ducimus illo, impedit, dolor mollitia minus aliquid vero vel, laudantium est dicta nam consequatur excepturi? Possimus dolores laboriosam reiciendis dignissimos commodi enim assumenda fugit esse natus excepturi, alias expedita accusantium nemo doloremque eveniet consectetur? Facilis doloremque ullam porro alias quae sit ex voluptate quisquam minima quaerat quos cum deleniti, deserunt impedit ipsa dolor. Accusantium itaque ea ipsa, officiis quod quibusdam odit repellendus eos sunt fugit facilis repellat. Repudiandae iusto aliquam necessitatibus velit ut cum amet, saepe quasi consequatur quos iste voluptatum sapiente commodi sint cupiditate perspiciatis beatae ratione officiis ipsa. Sapiente maiores atque tempora quae esse totam, eligendi omnis, deleniti provident cupiditate nisi officiis architecto quibusdam similique cumque suscipit fugit quas eos a dolorum distinctio laboriosam beatae. Iure ipsum commodi consequatur rerum ut ratione vero pariatur esse nobis voluptas, quis voluptatem id eum consequuntur possimus minima corporis dolor officiis nostrum, animi iste sequi fugit itaque non. Dolore, aliquid libero mollitia eos exercitationem architecto enim provident esse itaque corporis similique veritatis. Odit reiciendis dolore excepturi expedita. Voluptatum et a sapiente quibusdam nihil, quasi perspiciatis ad. Consequatur officiis sunt tenetur labore, sed nam ex totam deserunt maiores omnis nostrum, nemo illum aliquam beatae!</p>
                      -->
-                     <div class="w-full">
+                     <div class="w-full text-slate-900">
 
-                         <app-text-editor class="w-full text-gray-700"></app-text-editor>
+                         <!-- <app-text-editor (fileContent)="getFilecontent($event)" class="w-full text-gray-700"></app-text-editor> -->
+                         <!-- temparary filecontent -->
+                         <textarea class="w-full p-3 rounded-md text-gray-500 bg-gradient-to-t from-slate-900 to-slate-950 border-2 border-slate-900" [(ngModel)]="fileContent" placeholder="Type here . . ." #content  name="content" id="content" cols="30" rows="10"></textarea>
+                         <button class="bg-blue-500 h-10 w-28 mt-2 rounded-md flex justify-center items-center" (click)="updateFileContent(content.value)"><i class="fa-solid fa-floppy-disk mx-2"></i><span>Save</span></button>
                      </div>
                 </div>
 
 
-                <!-- file and folder creation -->
-                <div class="flex flex-col mx-5">
-
-                    <input type="text" class="my-3" [(ngModel)]="fileName" placeholder="Enter the file name">
-                    <input type="text" [(ngModel)]="fileContent" placeholder="Enter the content for the file">
-                    <button >create file</button>
-
-                    <input type="text" [(ngModel)]="folderName" placeholder="Enter the folder name">
-                    <button >create folder</button>
-                </div>
-
-                <!-- display files -->
                 
             </div>
 

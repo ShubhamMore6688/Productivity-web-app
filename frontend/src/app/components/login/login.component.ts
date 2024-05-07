@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {  Router } from '@angular/router';
 import axios from 'axios';
 
 @Component({
@@ -7,6 +8,7 @@ import axios from 'axios';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  constructor(private router: Router){}
   email: string = ''
   password: string = ''
 
@@ -16,6 +18,9 @@ export class LoginComponent {
     axios.post('http://localhost:3000/login', loginData)
     .then( Response => {
       console.log(Response.data)
+      if(Response.data.success){
+        this.router.navigate(['/Dashboard'])
+      }
     }).catch( Error => {
       console.error("error", Error)
     })

@@ -1,5 +1,6 @@
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import axios from 'axios';
 
 @Component({
@@ -11,7 +12,7 @@ export class SignupComponent {
   email:string =  '';
   password: string = '';
 
-  constructor(){}
+  constructor(private router: Router){}
 
   createAccount(email: string, password: string){
     const signupData = {email, password};
@@ -19,13 +20,12 @@ export class SignupComponent {
     axios.post('http://localhost:3000/signup', signupData)
     .then( Response =>{
       console.log("get responce");
+      if(Response.data.success){
+        this.router.navigate(['/Dashboard'])
+      }
     }).catch(Error => {
       console.error('There was an error', Error);
     })
-
-    // axios.get('http://localhost:3000/')
-    // .then( Response => console.log("success"))
-    // .catch(Error => console.log("error"))
 
 
    

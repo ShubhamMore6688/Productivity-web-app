@@ -1,8 +1,8 @@
 <div class="NgxEditor__Wrapper">
     <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-    <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+    <ngx-editor #content [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
 </div>
-<div class="text-white">
-    <p>{{html}}</p>
-    
+<div>
+    <button class="bg-blue-500" (click)="fileContentStore(content)">Save</button>
+    <p>{{ html }}</p>
 </div>

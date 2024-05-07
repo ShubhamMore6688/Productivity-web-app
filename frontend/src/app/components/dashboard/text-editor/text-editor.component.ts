@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { Editor } from 'ngx-editor';
 
 @Component({
@@ -8,11 +8,20 @@ import { Editor } from 'ngx-editor';
 })
 export class TextEditorComponent implements OnInit {
   editor !: Editor;
-  html !: '';
+  html: string = '<p>This is initial HTML content</p>'
+  @Output() fileContent = new EventEmitter<string>();
+
+  
 
   constructor(){}
   ngOnInit(): void {
     this.editor = new Editor();
   }
+
+  fileContentStore(content: any){
+    console.log(content)
+  }
+
+ 
 
 }
