@@ -18,6 +18,9 @@ import { EmojiPickerComponent } from './components/dashboard/emoji-picker/emoji-
 import { FormsModule } from '@angular/forms';
 import { TextEditorComponent } from './components/dashboard/text-editor/text-editor.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -33,14 +36,17 @@ import { NgxEditorModule } from 'ngx-editor';
     AvatarComponent,
     MainComponent,
     EmojiPickerComponent,
-    TextEditorComponent
+    TextEditorComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PickerComponent,
     FormsModule,
-    NgxEditorModule
+    NgxEditorModule,
+    AngularEditorModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import axios from 'axios';
 import { FolderService } from 'src/app/Services/folder-service.service';
 
@@ -13,6 +14,7 @@ export class DashboardComponent implements OnInit {
   // username and role
   name:string = 'shubham'
   role: string = 'devops'
+  HtmlContent = ''
 
    // text: string = ''
    sidebarEmoji: string = '🏠'
@@ -74,6 +76,10 @@ export class DashboardComponent implements OnInit {
   Files: any = []
   fileCreation(){
     this.createFile = !this.createFile;
+
+    if(this.createFile===false){
+      this.getAllfiles()
+    }
   }
 
   getAllfiles(){
@@ -88,13 +94,13 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  updateFileName(filename: string, filecontent: string){
+  updateFileName(filename: string){
     this.fileName = filename;
-    this.fileContent = filecontent
+    this.fileContent = this.HtmlContent
     // this.Files.push(this.fileName)
     console.log(this.fileContent)
     this.getAllfiles()
-    const data = {filename, filecontent}
+    const data = {filename, filecontent: this.HtmlContent}
 
     axios.post("http://localhost:3000/file", data)
     .then(Response => {
@@ -108,8 +114,8 @@ export class DashboardComponent implements OnInit {
    
   }
 
-  updateFileContent(filecontent: string){
-    const data = {filename: this.secondPart , filecontent}
+  updateFileContent(){
+    const data = {filename: this.secondPart , filecontent: this.HtmlContent}
    
 
     axios.put(`http://localhost:3000/file/${this.secondPart}`, data)
@@ -128,15 +134,34 @@ export class DashboardComponent implements OnInit {
     .then(Response => {
 
       // get the file content
-      this.fileContent = Response.data.message[0].filecontent
+      // this.fileContent = Response.data.message[0].filecontent
+      this.HtmlContent = Response.data.message[0].filecontent
+
       
-      console.log("getFilecontent", this.fileContent)
+      // console.log("getFilecontent", this.fileContent)
     })
     .catch(Error => {
       console.error("error", Error)
     })
 
   }
+
+  // text-editor configuaration 
+
+  
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+
+   
+  };
+
  
 
   getFilecontent(value: string){
