@@ -1,4 +1,5 @@
 import { Files } from "../models/file.js";
+import { Trash } from "../models/trash.js";
 
 export const createFile = async (req, res) => {
     const {filename, filecontent} = req.body;
@@ -103,7 +104,8 @@ export const deleteFile = async (req, res) => {
                 message: "file not found"
             })
         } 
-
+        const deletedFile = new Files(file.toObject());
+        await Trash.create(deletedFile);
         await Files.findOneAndDelete({_id: fileId});
         console.log("file deleted")
         res.status(200).json({
@@ -118,4 +120,23 @@ export const deleteFile = async (req, res) => {
     }
 
     
+}
+
+export const getTrashFiles = async (req, res) => {
+
+    try {
+        let trashfiles = await Trash.find()
+
+        res.status(200).json({
+            success: true,
+            trashfiles
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "internal server error"
+        })
+    }
+
+   
 }

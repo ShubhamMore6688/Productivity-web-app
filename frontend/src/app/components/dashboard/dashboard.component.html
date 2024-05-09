@@ -9,7 +9,17 @@
                <div class="ml-3">
                     <div class="my-1 mt-4"><i class="fa-solid fa-house mx-2"></i>My Workspace</div>
                     <div class="my-1"><i class="fa-solid fa-gear mx-2"></i>Setting</div>
-                    <div class="my-1"><i class="fa-solid fa-trash mx-2"></i>Trash</div>
+                    <div class="my-1 cursor-pointer" (click)="showTrashFiles()" ><i class="fa-solid fa-trash mx-2"></i>Trash</div>
+                    <div class="ml-10 cursor-pointer">
+                        <ng-template [ngIf]="trashFiles">
+                           
+                            <div class="my-1 flex items-center" id="test1" (click)="onFileSelect($event, file.filename, emoji.textContent) " *ngFor="let file of TrashFiles">
+                                <div>  <span #emoji class="mr-2">{{selectedEmoji}}</span>{{ file.filename}}</div>
+                                
+                            </div>
+                        </ng-template>
+                        
+                   </div>
         
                </div>
                <div class="mx-3 my-3 text-xs text-gray-700 font-bold flex justify-around items-center">
@@ -30,18 +40,6 @@
                     <div>  <span #emoji class="mr-2">{{selectedEmoji}}</span>{{ file.filename}}</div>
                     <i class="fa-solid fa-trash ml-16" (click)="deleteFile(file._id)"></i>
                 </div>
-
-                <!-- <div class="my-1" id="test1" (click)="onFileSelect($event)"><span>👩‍💻</span>  Test1</div>
-                <div class="my-1" id="test2" (click)="onFileSelect($event)"><span>💼</span>  Test2</div>
-                <div class="my-1" id="test3" (click)="onFileSelect($event)"><span>🤵</span>  Test3</div> -->
-<!-- 
-                <div *ngFor="let item of Files">
-                    <ul>
-                        <li><div class="my-1" id="test3" (click)="onFileSelect($event)"><span>🤵</span>{{item.name}}</div></li>
-                    </ul>
-                </div> -->
-                
-    
            </div>
         </div>
        <div>
@@ -90,14 +88,21 @@
         </div>
         <div class="flex flex-col justify-center items-center">
 
-            <!-- <ckeditor [(ngModel)]="text" [config]="editorConfig"></ckeditor> -->
-            <!-- <p-editor [(ngModel)]="text" [style]="{ height: '320px' }"></p-editor> -->
-            <!-- <quill-editor [(ngModel)]="editorContent" [style]="{ height: '320px' }"></quill-editor> -->
+            <ng-container *ngIf="filecreateToast">
+                <ng-container *ngTemplateOutlet="ifTemplate" ></ng-container>
+            </ng-container>
+            <ng-container *ngIf="deletefileToast">
+                <ng-container *ngTemplateOutlet="elseTemplate" ></ng-container>
+            </ng-container>
+            <ng-template #ifTemplate class="h-10 w-full bg-green-500 "></ng-template>
+            <ng-template #elseTemplate class="h-10 w-full bg-red-500 "></ng-template> 
+
+           
             <ng-container *ngIf="banner">
                 <ng-container *ngTemplateOutlet="data"></ng-container>
             </ng-container>
             <ng-template #data>
-                <div class="h-28 overflow-hidden object-cover">
+                <div class="h-28  overflow-hidden object-cover">
                     <img src="../../../assets/images/banner.jpg" alt="">
                 </div>
             </ng-template>

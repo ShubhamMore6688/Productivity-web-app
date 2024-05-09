@@ -87,18 +87,19 @@ export class DashboardComponent implements OnInit {
     .then(Response => {
       
       this.Files = Response.data.files;
-      console.log(this.Files)
+      
     })
     .catch(Error => {
       console.error("error", Error)
     })
   }
-
+  filecreateToast = false
   updateFileName(filename: string){
+    this.filecreateToast = true;
     this.fileName = filename;
     this.fileContent = this.HtmlContent
     // this.Files.push(this.fileName)
-    console.log(this.fileContent)
+    // console.log(this.fileContent)
     this.getAllfiles()
     const data = {filename, filecontent: this.HtmlContent}
 
@@ -161,9 +162,10 @@ export class DashboardComponent implements OnInit {
 
    
   };
-
+  deletefileToast = false;
   deleteFile(fileId: string){
     this.getAllfiles()
+    // this.deletefileToast = true;
     axios.delete(`http://localhost:3000/file/${fileId}`)
     .then(Response => {
       console.log(Response.data.message);
@@ -171,6 +173,25 @@ export class DashboardComponent implements OnInit {
     .then(Error => {
       console.error("error",Error);
     })
+  }
+
+
+  // show trash files
+  trashFiles = false
+  TrashFiles: any = []
+  showTrashFiles(){
+    console.log("show trash files")
+    axios.get<any>("http://localhost:3000/trash")
+    .then(Response => {
+      
+      this.TrashFiles = Response.data.trashfiles;
+      
+    })
+    .catch(Error => {
+      console.error("error", Error)
+    })
+
+    this.trashFiles = !this.trashFiles
   }
 
  

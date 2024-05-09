@@ -11,14 +11,17 @@
             </div>
             <p>An all-in-One Collaboration and productivity Platform</p>
         </div>
-        <div class="w-full flex justify-center">
-            <input [(ngModel)]="email" class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Email" type="email" name="email">
+        <div class="w-full flex justify-center items-center flex-col">
+            <input [(ngModel)]="email" class="form-control w-80 h-10 mt-3 mb-1 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Email" type="email" name="email" #emailError="ngModel" required>
+            <span *ngIf="emailError.invalid && emailError.touched" class="text-red-600 text-sm">Email is required</span>
         </div>
-        <div class="w-full flex justify-center">
-            <input [(ngModel)]="password" class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Password" type="password" name="password">
+        <div class="w-full flex justify-center items-center flex-col">
+            <input [(ngModel)]="password" class="form-control w-80 h-10 mt-3 mb-1 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Password" type="password" name="password" #passError="ngModel" required>
+            <span *ngIf="passError.invalid && passError.touched" class="text-red-600">Password is required</span>
         </div>
-        <div class="w-full flex justify-center">
-            <input class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Confirm Password" type="password" name="password">
+        <div class="w-full flex justify-center items-center flex-col">
+            <input [(ngModel)]="password" class="form-control w-80 h-10 mt-3 mb-1 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Confirm Password" type="password" name="password" #passError="ngModel" required>
+            <span *ngIf="passError.invalid && passError.touched" class="text-red-600">Password is required</span>
         </div>
         <button (click)="createAccount(email, password)" class="w-80 h-10 my-3 cursor-pointer rounded flex justify-center items-center text-xl font-bold bg-brand-primaryPurple">
             Create Account
