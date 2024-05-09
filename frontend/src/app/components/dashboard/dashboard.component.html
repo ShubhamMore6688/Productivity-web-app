@@ -26,8 +26,9 @@
                 <ng-template [ngIf]="createFile">
                     <div class="my-1"><input #filename (change)="updateFileName(filename.value  )" class="w-full bg-black border-1 border-slate-50" type="text"></div>
                 </ng-template>
-                <div class="my-1" id="test1" (click)="onFileSelect($event, file.filename, emoji.textContent) " *ngFor="let file of Files">
-                    <span #emoji class="mr-2">{{selectedEmoji}}</span>{{ file.filename}}
+                <div class="my-1 flex items-center" id="test1" (click)="onFileSelect($event, file.filename, emoji.textContent) " *ngFor="let file of Files">
+                    <div>  <span #emoji class="mr-2">{{selectedEmoji}}</span>{{ file.filename}}</div>
+                    <i class="fa-solid fa-trash ml-16" (click)="deleteFile(file._id)"></i>
                 </div>
 
                 <!-- <div class="my-1" id="test1" (click)="onFileSelect($event)"><span>👩‍💻</span>  Test1</div>

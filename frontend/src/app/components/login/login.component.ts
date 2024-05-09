@@ -14,6 +14,13 @@ export class LoginComponent {
 
   login(email: string, password: string){
     const loginData =  {email, password};
+    if(this.email === '' && this.password === ''){
+
+    }else if(this.email === ''){
+
+    }else{
+      
+    }
 
     axios.post('http://localhost:3000/login', loginData)
     .then( Response => {

@@ -162,6 +162,17 @@ export class DashboardComponent implements OnInit {
    
   };
 
+  deleteFile(fileId: string){
+    this.getAllfiles()
+    axios.delete(`http://localhost:3000/file/${fileId}`)
+    .then(Response => {
+      console.log(Response.data.message);
+    })
+    .then(Error => {
+      console.error("error",Error);
+    })
+  }
+
  
 
   getFilecontent(value: string){

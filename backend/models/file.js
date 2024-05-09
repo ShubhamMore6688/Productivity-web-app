@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const fileSchema = mongoose.Schema({
     filename: {
         type: String,
+        unique: true
     },
 
     filecontent: {

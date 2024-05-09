@@ -12,7 +12,8 @@
             <p>An all-in-One Collaboration and productivity Platform</p>
         </div>
         <div class="w-full flex justify-center">
-            <input [(ngModel)]="email" class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Email" type="email" name="email">
+            <input [(ngModel)]="email" class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Email" type="email" name="email" #emailError="ngModel">
+            <span *ngIf="emailError.inValid && emailError.touched" class="text-red-600">Email is required</span>
         </div>
         <div class="w-full flex justify-center">
             <input [(ngModel)]="password" class="w-80 h-10 my-3 px-3 bg-brand-dark rounded border-background-clr border-1" placeholder="Password" type="password" name="password">
