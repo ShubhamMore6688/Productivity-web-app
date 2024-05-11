@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit {
    onFileSelect(event: any, name: string, emoji: any){
     console.log(emoji)
     this.perticularFileContent(name);
+    this.trashFileContent(name);
     const parts = event.target.textContent.trim().split(' ');
     this.secondPart = name;
     this.selectedEmoji = emoji;
@@ -103,7 +104,7 @@ export class DashboardComponent implements OnInit {
     this.getAllfiles()
     const data = {filename, filecontent: this.HtmlContent}
 
-    axios.post("http://localhost:3000/file", data)
+    axios.post("http://localhost:3000/file", data, {withCredentials: true})
     .then(Response => {
       console.log(Response.data)
     })
@@ -147,6 +148,23 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  trashFileContent(name: string){
+
+    axios.get(`http://localhost:3000/trash/${name}`)
+    .then(Response => {
+
+      // get the file content
+      // this.fileContent = Response.data.message[0].filecontent
+      this.HtmlContent = Response.data.message[0].filecontent
+
+      
+      // console.log("getFilecontent", this.fileContent)
+    })
+    .catch(Error => {
+      console.error("error", Error)
+    })
+  }
+
   // text-editor configuaration 
 
   
@@ -163,14 +181,34 @@ export class DashboardComponent implements OnInit {
    
   };
   deletefileToast = false;
-  deleteFile(fileId: string){
-    this.getAllfiles()
-    // this.deletefileToast = true;
+  confirmFileDeletion = false;
+
+  handleCancelFileDeletion(value: boolean){
+    this.confirmFileDeletion = !value;
+  }
+
+  fileId: string = ''
+  clickOnTrash(fileid: string){
+    this.confirmFileDeletion = !this.confirmFileDeletion
+    this.fileId = fileid;
+    
+  }
+  
+  handleConfirmFileDeletion(value: boolean){
+    this.deleteFile(value, this.fileId);
+    // this.getAllfiles()
+    this.confirmFileDeletion = !value;
+  }
+  deleteFile(value: boolean, fileId: string){
+
     axios.delete(`http://localhost:3000/file/${fileId}`)
     .then(Response => {
       console.log(Response.data.message);
+      if(value){
+        this.getAllfiles();
+      }
     })
-    .then(Error => {
+    .catch(Error => {
       console.error("error",Error);
     })
   }
@@ -194,7 +232,33 @@ export class DashboardComponent implements OnInit {
     this.trashFiles = !this.trashFiles
   }
 
+
+  // delete the files from trash permenantly
+
+  deleteFromTrash(fileId: string){
+    
+    axios.delete(`http://localhost:3000/trash/${fileId}`)
+    .then(Response => {
+      console.log(Response.data.message);
+      this.showTrashFiles();
+    })
+    .catch(Error => {
+      console.error("error",Error);
+    })
+  }
  
+
+  // logout
+
+  logoutFunc(){
+    axios.get("http://localhost:3000/logout" , {withCredentials: true})
+    .then(Response => {
+      console.log(Response.data.message);
+    })
+    .catch(Error => {
+      console.error("error", Error);
+    })
+  }
 
   getFilecontent(value: string){
     // this.fileContent = value;

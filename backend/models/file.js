@@ -9,6 +9,11 @@ const fileSchema = mongoose.Schema({
     filecontent: {
         type: String
     }, 
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+
 
     createdBy: {
         type: Schema.Types.ObjectId,

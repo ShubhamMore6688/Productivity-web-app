@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,8 @@ import { TextEditorComponent } from './components/dashboard/text-editor/text-edi
 import { NgxEditorModule } from 'ngx-editor';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { FileDeletionConfirmComponent } from './components/dashboard/file-deletion-confirm/file-deletion-confirm.component';
+
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     MainComponent,
     EmojiPickerComponent,
     TextEditorComponent,
+    FileDeletionConfirmComponent,
     
   ],
   imports: [
@@ -46,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     NgxEditorModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

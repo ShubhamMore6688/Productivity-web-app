@@ -4,12 +4,17 @@ import router from "./routes/user.js";
 import routerFiles from "./routes/file.js"
 import cors from "cors"
 import cookieParser from "cookie-parser";
-const app = express();
 
+const app = express();
+app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:4200', 
+    credentials: true 
+  }));
+  
 connectDB();
 app.use(express.json());
-app.use(cookieParser());
-app.use(cors());
+// app.use(cors());
 app.use(router);
 app.use(routerFiles);
 

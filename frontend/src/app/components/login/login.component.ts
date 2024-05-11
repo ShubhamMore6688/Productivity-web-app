@@ -22,14 +22,16 @@ export class LoginComponent {
       
     }
 
-    axios.post('http://localhost:3000/login', loginData)
-    .then( Response => {
-      console.log(Response.data)
+    
+
+    axios.post('http://localhost:3000/login', loginData, {withCredentials: true})
+    .then( Response =>{
+      console.log("get responce");
       if(Response.data.success){
         this.router.navigate(['/Dashboard'])
       }
-    }).catch( Error => {
-      console.error("error", Error)
+    }).catch(Error => {
+      console.error('There was an error', Error);
     })
   }
 }

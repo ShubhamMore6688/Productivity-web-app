@@ -17,7 +17,7 @@ export class SignupComponent {
   createAccount(email: string, password: string){
     const signupData = {email, password};
 
-    axios.post('http://localhost:3000/signup', signupData)
+    axios.post('http://localhost:3000/signup', signupData, {withCredentials: true})
     .then( Response =>{
       console.log("get responce");
       if(Response.data.success){

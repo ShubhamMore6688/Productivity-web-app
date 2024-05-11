@@ -1,31 +1,46 @@
 import { Files } from "../models/file.js";
 import { Trash } from "../models/trash.js";
+import jwt from 'jsonwebtoken';
+import { User } from "../models/user.js";
 
 export const createFile = async (req, res) => {
-    const {filename, filecontent} = req.body;
-
+    
     try {
+        const {token} = req.cookies;
+        const {filename, filecontent} = req.body;
+        console.log("value of token from createfile", token);
+
+        if(!token){
+            return res.status(401).json({
+                success: false,
+                message: "login first"
+            })
+        }
+        const decoded = jwt.verify(token, "kfdjsklfdfjdfkajdsfkjad");
+        const user = await User.findById(decoded._id);
         let file = await Files.findOne({filename})
 
-    if(file){
-        file.filecontent = filecontent;
-        res.status(200).json({
-            success: true,
-            message: file
-        })
-    }else{
-       file = await Files.create({
-            filename, 
-            filecontent
-            
-        });
+        if(file){
+            file.filecontent = filecontent;
+            res.status(200).json({
+                success: true,
+                message: file
+            })
+        }else{
+        file = await Files.create({
+                filename, 
+                filecontent,
+                user: user._id
+                
+            });
 
-        res.status(200).json({
-            success: true,
-            message: file
-        })
+            res.status(200).json({
+                success: true,
+                message: file
+            })
     }
     } catch (error) {
+        console.log("file creation error: ", error)
         res.status(500).json({
             success: false,
             message: "internal server error"
@@ -79,7 +94,24 @@ export const updateFileContent = async (req,res) => {
 export const getFileContent = async (req,res) => {
     const {filename} = req.params;
     const requiredFile = await Files.find({filename});
-    console.log(requiredFile)
+    // console.log(requiredFile)
+    if(requiredFile){
+        res.status(200).json({
+            success: true,
+            message: requiredFile
+        })
+    }else{
+        res.status(404).json({
+            success:false,
+            message: "file not found"
+        })
+    }
+}
+
+export const trashFileContent = async (req,res) => {
+    const {filename} = req.params;
+    const requiredFile = await Trash.find({filename});
+    // console.log(requiredFile)
     if(requiredFile){
         res.status(200).json({
             success: true,
@@ -104,15 +136,21 @@ export const deleteFile = async (req, res) => {
                 message: "file not found"
             })
         } 
-        const deletedFile = new Files(file.toObject());
-        await Trash.create(deletedFile);
+        const existingTrash = await Trash.findOne({filename: file.filename});
+        if(existingTrash){
+            await Trash.updateOne({ _id: existingTrash._id }, { $set: { file: file.toObject() } });
+        }else{
+
+            await Trash.create(file.toObject());
+        }
         await Files.findOneAndDelete({_id: fileId});
-        console.log("file deleted")
+        // console.log("file deleted")
         res.status(200).json({
             success: true,
             message: "file deleted successfully"
         })
     } catch (error) {
+        console.log("error in deleting file: ", error)
         res.status(500).json({
             success: false,
             message: "internal server error"
@@ -139,4 +177,36 @@ export const getTrashFiles = async (req, res) => {
     }
 
    
+}
+
+
+
+
+export const deleteTrashFile = async (req, res) => {
+    const {fileId} = req.params;
+
+    try {
+        const file = await Trash.findOne({_id: fileId})
+        if(!file){
+            res.status(404).json({
+                success: false,
+                message: "file not found"
+            })
+        } 
+       
+        await Trash.findOneAndDelete({_id: fileId});
+        // console.log("file deleted")
+        res.status(200).json({
+            success: true,
+            message: "file deleted successfully"
+        })
+    } catch (error) {
+        console.log("error in deleting file: ", error)
+        res.status(500).json({
+            success: false,
+            message: "internal server error"
+        })
+    }
+
+    
 }
