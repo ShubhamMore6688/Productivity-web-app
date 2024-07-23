@@ -177,7 +177,7 @@ export class DashboardComponent implements OnInit {
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
-
+    
    
   };
   deletefileToast = false;
