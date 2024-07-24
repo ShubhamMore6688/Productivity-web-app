@@ -1,6 +1,6 @@
 <div class="h-full w-full flex">
     <!-- left container  -->
-    <div class="bg-black w-1/5 h-screen text-gray-500 flex flex-col justify-between ">
+    <div class="hidden  bg-black w-1/5 h-screen text-gray-500 lg:flex flex-col justify-between ">
         <div>
             <div class="flex items-center m-2 h-10">
                 <img src="../../../assets/images/cypresslogo.svg" alt="">
@@ -68,7 +68,7 @@
        
 
     <!-- right container -->
-    <div class=" h-screen w-4/5 flex flex-col">
+    <div class=" h-screen w-full lg:w-4/5 flex flex-col">
         <div class="h-10 w-full flex justify-end my-2">
             <div>
                 <button (click)="handleBanner()">+</button>
@@ -120,18 +120,18 @@
                 </div>
             </ng-template>
 
-            <div class=" h-80 w-2/3 my-5 overflow-y-auto hide-scrollbar">
+            <div class=" h-96 lg:h-80 w-96 sm:w-2/4 md:w-3/4 lg:w-2/3 my-5 overflow-y-auto hide-scrollbar">
                 <span class="h-20 w-20 text-6xl mx-3 cursor-pointer" (click)="changeEmoji()">{{selectedEmoji}}</span>
                 <span class="h-20 w-20 text-6xl mx-3 cursor-pointer" (click)="changeEmoji()">{{secondPart}}</span>
 
                 <div>
-                    <app-emoji-picker class="h-10 w-10" *ngIf="changeEmj" (selectedEmoji)="getSelectedEmoji($event)"></app-emoji-picker>
+                    <app-emoji-picker class=" h-5 w-5 sm:h-10 sm:w-10" *ngIf="changeEmj" (selectedEmoji)="getSelectedEmoji($event)"></app-emoji-picker>
                 </div>
                   
 
                 
                 <!-- banner upload and remove button  -->
-                <div class="text-Neutrals/neutrals-6 flex mx-3 my-4 cursor-pointer">
+                <div class="text-Neutrals/neutrals-6 flex mx-3 my-4 cursor-pointer text-sm sm:text-lg">
                     <div class="mx-2"><p>Upload Banner</p></div>
                     <div class="mx-2" (click)="removeBanner()"><p>Remove Banner</p></div>
                 </div>
@@ -141,7 +141,7 @@
                     <span>WORKSPACE </span>
                    
                 </div>
-                <div class="flex justify-center items-center  text-justify m-4 text-Neutrals/neutrals-6">
+                <div class="flex justify-center items-center  text-justify  text-Neutrals/neutrals-6">
                     <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa ducimus illo, impedit, dolor mollitia minus aliquid vero vel, laudantium est dicta nam consequatur excepturi? Possimus dolores laboriosam reiciendis dignissimos commodi enim assumenda fugit esse natus excepturi, alias expedita accusantium nemo doloremque eveniet consectetur? Facilis doloremque ullam porro alias quae sit ex voluptate quisquam minima quaerat quos cum deleniti, deserunt impedit ipsa dolor. Accusantium itaque ea ipsa, officiis quod quibusdam odit repellendus eos sunt fugit facilis repellat. Repudiandae iusto aliquam necessitatibus velit ut cum amet, saepe quasi consequatur quos iste voluptatum sapiente commodi sint cupiditate perspiciatis beatae ratione officiis ipsa. Sapiente maiores atque tempora quae esse totam, eligendi omnis, deleniti provident cupiditate nisi officiis architecto quibusdam similique cumque suscipit fugit quas eos a dolorum distinctio laboriosam beatae. Iure ipsum commodi consequatur rerum ut ratione vero pariatur esse nobis voluptas, quis voluptatem id eum consequuntur possimus minima corporis dolor officiis nostrum, animi iste sequi fugit itaque non. Dolore, aliquid libero mollitia eos exercitationem architecto enim provident esse itaque corporis similique veritatis. Odit reiciendis dolore excepturi expedita. Voluptatum et a sapiente quibusdam nihil, quasi perspiciatis ad. Consequatur officiis sunt tenetur labore, sed nam ex totam deserunt maiores omnis nostrum, nemo illum aliquam beatae!</p>
                      -->
                      <div class="w-full text-black">
@@ -152,7 +152,7 @@
                          
                          
                          <!-- implementing text editor -->
-                         <angular-editor class="rounded-md  bg-gradient-to-t from-slate-900 to-slate-950 border-2 border-slate-900" [placeholder]="'Enter text here...'" [(ngModel)]="HtmlContent" [config]="config"></angular-editor>
+                         <angular-editor class=" rounded-md  bg-gradient-to-t from-slate-900 to-slate-950 border-2 border-slate-900" [placeholder]="'Enter text here...'" [(ngModel)]="HtmlContent" [config]="config"></angular-editor>
                          <button class="bg-blue-500 h-10 w-28 mt-2 rounded-md flex justify-center items-center" (click)="updateFileContent()"><i class="fa-solid fa-floppy-disk mx-2"></i><span>Save</span></button>
 
                         
@@ -165,7 +165,16 @@
 
 
         </div>
+
+        <!-- <div class="bg-white h-screen w-10 z-10">
+
+        </div> -->
     </div>
+
+    <!-- bottom navbar -->
+    <!-- <div class="bg-white h-20 w-full bottom-0 sticky">
+
+    </div> -->
 </div>
 
  <!-- file delete confirmation -->
