@@ -12,8 +12,9 @@ config({
   path: "./config/config.env"
 });
 app.use(cors({
-    origin: '*', 
-    credentials: true 
+  origin: '*', // Allow these two origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: false,
   }));
   
 connectDB();

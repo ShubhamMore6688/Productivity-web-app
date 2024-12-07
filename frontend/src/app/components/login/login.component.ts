@@ -9,6 +9,8 @@ import axios from 'axios';
 })
 export class LoginComponent {
   constructor(private router: Router){}
+   // backend url
+  backend: string = 'https://productivity-web-app-backend.vercel.app'
   email: string = ''
   password: string = ''
 
@@ -24,7 +26,7 @@ export class LoginComponent {
 
     
 
-    axios.post('http://localhost:3000/login', loginData, {withCredentials: true})
+    axios.post(`${this.backend}/login`, loginData, {withCredentials: true})
     .then( Response =>{
       console.log("get responce");
       if(Response.data.success){

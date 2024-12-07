@@ -14,6 +14,9 @@ export class DashboardComponent implements OnInit {
   // username and role
   name:string = 'shubham'
   role: string = 'devops'
+
+  // backend url
+  backend: string = 'https://productivity-web-app-backend.vercel.app'
   HtmlContent = ''
 
    // text: string = ''
@@ -84,7 +87,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllfiles(){
-    axios.get<any>("http://localhost:3000/file")
+    axios.get<any>(`${this.backend}/file`)
     .then(Response => {
       
       this.Files = Response.data.files;
@@ -104,7 +107,7 @@ export class DashboardComponent implements OnInit {
     this.getAllfiles()
     const data = {filename, filecontent: this.HtmlContent}
 
-    axios.post("http://localhost:3000/file", data, {withCredentials: true})
+    axios.post(`${this.backend}/file`, data, {withCredentials: true})
     .then(Response => {
       console.log(Response.data)
     })
@@ -120,7 +123,7 @@ export class DashboardComponent implements OnInit {
     const data = {filename: this.secondPart , filecontent: this.HtmlContent}
    
 
-    axios.put(`http://localhost:3000/file/${this.secondPart}`, data)
+    axios.put(`${this.backend}/file/${this.secondPart}`, data)
     .then(Response => {
       console.log(Response.data);
     })
@@ -132,7 +135,7 @@ export class DashboardComponent implements OnInit {
   // after clicking the file we get that file content
   perticularFileContent(name:string){
 
-    axios.get(`http://localhost:3000/file/${name}`)
+    axios.get(`${this.backend}/file/${name}`)
     .then(Response => {
 
       // get the file content
@@ -150,7 +153,7 @@ export class DashboardComponent implements OnInit {
 
   trashFileContent(name: string){
 
-    axios.get(`http://localhost:3000/trash/${name}`)
+    axios.get(`${this.backend}/trash/${name}`)
     .then(Response => {
 
       // get the file content
@@ -201,7 +204,7 @@ export class DashboardComponent implements OnInit {
   }
   deleteFile(value: boolean, fileId: string){
 
-    axios.delete(`http://localhost:3000/file/${fileId}`)
+    axios.delete(`${this.backend}/file/${fileId}`)
     .then(Response => {
       console.log(Response.data.message);
       if(value){
@@ -219,7 +222,7 @@ export class DashboardComponent implements OnInit {
   TrashFiles: any = []
   showTrashFiles(){
     console.log("show trash files")
-    axios.get<any>("http://localhost:3000/trash")
+    axios.get<any>(`${this.backend}/trash`)
     .then(Response => {
       
       this.TrashFiles = Response.data.trashfiles;
@@ -237,7 +240,7 @@ export class DashboardComponent implements OnInit {
 
   deleteFromTrash(fileId: string){
     
-    axios.delete(`http://localhost:3000/trash/${fileId}`)
+    axios.delete(`${this.backend}/trash/${fileId}`)
     .then(Response => {
       console.log(Response.data.message);
       this.showTrashFiles();
@@ -251,7 +254,7 @@ export class DashboardComponent implements OnInit {
   // logout
 
   logoutFunc(){
-    axios.get("http://localhost:3000/logout" , {withCredentials: true})
+    axios.get(`${this.backend}/logout` , {withCredentials: true})
     .then(Response => {
       console.log(Response.data.message);
     })

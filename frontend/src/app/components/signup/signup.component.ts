@@ -11,13 +11,15 @@ import axios from 'axios';
 export class SignupComponent {
   email:string =  '';
   password: string = '';
+   // backend url
+  backend: string = 'https://productivity-web-app-backend.vercel.app'
 
   constructor(private router: Router){}
 
   createAccount(email: string, password: string){
     const signupData = {email, password};
 
-    axios.post('http://localhost:3000/signup', signupData, {withCredentials: true})
+    axios.post(`${this.backend}/signup`, signupData, {withCredentials: true})
     .then( Response =>{
       console.log("get responce");
       if(Response.data.success){
