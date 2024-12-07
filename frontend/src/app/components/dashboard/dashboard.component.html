@@ -4,11 +4,11 @@
         <div>
             <div class="flex items-center m-2 h-10">
                 <img src="../../../assets/images/cypresslogo.svg" alt="">
-                <h3 class="mx-2 text-xl font-bold text-Neutrals/neutrals-6">FocusFuse</h3>
+                <h3 class="mx-2 text-xl font-bold text-Neutrals/neutrals-6">Blogify</h3>
                </div>
                <div class="ml-3">
-                    <div class="my-1 mt-4"><i class="fa-solid fa-house mx-2"></i>My Workspace</div>
-                    <div class="my-1"><i class="fa-solid fa-gear mx-2"></i>Setting</div>
+                    <div class="my-1 mt-4"><i class="fa-solid fa-house mx-2"></i>Home</div>
+                    <div class="my-1"><i class="fa-solid fa-gear mx-2"></i>Profile</div>
                     <div class="my-1 cursor-pointer" (click)="showTrashFiles()" ><i class="fa-solid fa-trash mx-2"></i>Trash</div>
                     <div class="ml-10 cursor-pointer">
                         <ng-template [ngIf]="trashFiles">
@@ -19,10 +19,6 @@
                                 
                             </div>
 
-                            <!-- <div class="my-1 flex items-center" id="test1" (click)="onFileSelect($event, file.filename, emoji.textContent) " *ngFor="let file of Files">
-                                <div>  <span #emoji class="mr-2">{{selectedEmoji}}</span>{{ file.filename}}</div>
-                                <i class="fa-solid fa-trash ml-16" (click)="clickOnTrash(file._id)"></i>
-                            </div> -->
                         </ng-template>
                         
                    </div>
@@ -142,15 +138,9 @@
                    
                 </div>
                 <div class="flex justify-center items-center  text-justify  text-Neutrals/neutrals-6">
-                    <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa ducimus illo, impedit, dolor mollitia minus aliquid vero vel, laudantium est dicta nam consequatur excepturi? Possimus dolores laboriosam reiciendis dignissimos commodi enim assumenda fugit esse natus excepturi, alias expedita accusantium nemo doloremque eveniet consectetur? Facilis doloremque ullam porro alias quae sit ex voluptate quisquam minima quaerat quos cum deleniti, deserunt impedit ipsa dolor. Accusantium itaque ea ipsa, officiis quod quibusdam odit repellendus eos sunt fugit facilis repellat. Repudiandae iusto aliquam necessitatibus velit ut cum amet, saepe quasi consequatur quos iste voluptatum sapiente commodi sint cupiditate perspiciatis beatae ratione officiis ipsa. Sapiente maiores atque tempora quae esse totam, eligendi omnis, deleniti provident cupiditate nisi officiis architecto quibusdam similique cumque suscipit fugit quas eos a dolorum distinctio laboriosam beatae. Iure ipsum commodi consequatur rerum ut ratione vero pariatur esse nobis voluptas, quis voluptatem id eum consequuntur possimus minima corporis dolor officiis nostrum, animi iste sequi fugit itaque non. Dolore, aliquid libero mollitia eos exercitationem architecto enim provident esse itaque corporis similique veritatis. Odit reiciendis dolore excepturi expedita. Voluptatum et a sapiente quibusdam nihil, quasi perspiciatis ad. Consequatur officiis sunt tenetur labore, sed nam ex totam deserunt maiores omnis nostrum, nemo illum aliquam beatae!</p>
-                     -->
+                   
                      <div class="w-full text-black">
 
-                         <!-- <app-text-editor (fileContent)="getFilecontent($event)" class="w-full text-gray-700"></app-text-editor> -->
-                         <!-- temparary filecontent -->
-                         <!-- <textarea class="w-full p-3 rounded-md text-gray-500 bg-gradient-to-t from-slate-900 to-slate-950 border-2 border-slate-900" [(ngModel)]="fileContent" placeholder="Type here . . ." #content  name="content" id="content" cols="30" rows="10"></textarea> -->
-                         
-                         
                          <!-- implementing text editor -->
                          <angular-editor class=" rounded-md  bg-gradient-to-t from-slate-900 to-slate-950 border-2 border-slate-900" [placeholder]="'Enter text here...'" [(ngModel)]="HtmlContent" [config]="config"></angular-editor>
                          <button class="bg-blue-500 h-10 w-28 mt-2 rounded-md flex justify-center items-center" (click)="updateFileContent()"><i class="fa-solid fa-floppy-disk mx-2"></i><span>Save</span></button>
@@ -158,23 +148,13 @@
                         
                      </div>
                 </div>
-
-
-                
             </div>
 
 
         </div>
 
-        <!-- <div class="bg-white h-screen w-10 z-10">
-
-        </div> -->
     </div>
 
-    <!-- bottom navbar -->
-    <!-- <div class="bg-white h-20 w-full bottom-0 sticky">
-
-    </div> -->
 </div>
 
  <!-- file delete confirmation -->

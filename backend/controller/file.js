@@ -16,7 +16,7 @@ export const createFile = async (req, res) => {
                 message: "login first"
             })
         }
-        const decoded = jwt.verify(token, "kfdjsklfdfjdfkajdsfkjad");
+        const decoded = jwt.verify(token, process.env.TOKEN);
         const user = await User.findById(decoded._id);
         let file = await Files.findOne({filename})
 

@@ -4,17 +4,20 @@ import router from "./routes/user.js";
 import routerFiles from "./routes/file.js"
 import cors from "cors"
 import cookieParser from "cookie-parser";
+import { config } from "dotenv";
 
 const app = express();
 app.use(cookieParser());
+config({
+  path: "./config/config.env"
+});
 app.use(cors({
-    origin: 'http://localhost:4200', 
+    origin: '*', 
     credentials: true 
   }));
   
 connectDB();
 app.use(express.json());
-// app.use(cors());
 app.use(router);
 app.use(routerFiles);
 

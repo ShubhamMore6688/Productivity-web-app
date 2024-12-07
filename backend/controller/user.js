@@ -20,7 +20,7 @@ export const register = async (req, res) => {
             email, 
             password: encryPassword
         })
-        const token = jwt.sign({_id: user._id}, "kfdjsklfdfjdfkajdsfkjad");
+        const token = jwt.sign({_id: user._id}, process.env.TOKEN);
         res.status(200).cookie("token", token, {
             httpOnly: true,
             path: "/"
@@ -51,7 +51,7 @@ export const login = async (req,res) => {
                     message: "Password is incorrect"
                 })
             }
-            const token = jwt.sign({_id: user._id}, "kfdjsklfdfjdfkajdsfkjad");
+            const token = jwt.sign({_id: user._id}, process.env.TOKEN);
             res.status(200).cookie("token", token, {
                 httpOnly: true,
                 path: "/"

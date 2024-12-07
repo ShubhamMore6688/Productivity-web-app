@@ -21,6 +21,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { FileDeletionConfirmComponent } from './components/dashboard/file-deletion-confirm/file-deletion-confirm.component';
+import { ProfileComponent } from './components/dashboard/profile/profile.component';
 
 
 
@@ -40,6 +41,8 @@ import { FileDeletionConfirmComponent } from './components/dashboard/file-deleti
     EmojiPickerComponent,
     TextEditorComponent,
     FileDeletionConfirmComponent,
+    ProfileComponent,
+    
     
   ],
   imports: [
