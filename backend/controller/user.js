@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { User } from "../models/user.js";
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 export const register = async (req, res) => {
     const {email, password} = req.body;
@@ -15,7 +15,7 @@ export const register = async (req, res) => {
                 message: "User is already registered"
             })
         }
-        const encryPassword = await bcrypt.hash(password, 10);
+        const encryPassword = await bcrypt.hashSync(password, 10);
         user = await User.create({
             email, 
             password: encryPassword
@@ -44,7 +44,7 @@ export const login = async (req,res) => {
         let user = await User.findOne({email});
 
         if(user){
-            const isPasswordMatch = await bcrypt.compare(password, user.password);
+            const isPasswordMatch = await bcrypt.compareSync(password, user.password);
             if(!isPasswordMatch){
                 return res.status(404).json({
                     success: false,
