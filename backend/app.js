@@ -12,9 +12,8 @@ config({
   path: "./config/config.env"
 });
 app.use(cors({
-  origin: '*', // Allow these two origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: false,
+    origin: 'https://productivity-web-app-frontend.vercel.app', 
+    credentials: true 
   }));
   
 connectDB();
@@ -25,7 +24,7 @@ app.use(routerFiles);
 app.get('/', (req, res)=>{
   return res.json({
     success: true,
-    message: "server is up and running"
+    message: "server is up and running "
   })
 })
 
