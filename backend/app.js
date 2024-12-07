@@ -21,6 +21,13 @@ app.use(express.json());
 app.use(router);
 app.use(routerFiles);
 
+app.get('/', (req, res)=>{
+  return res.json({
+    success: true,
+    message: "server is up and running"
+  })
+})
+
 
 app.listen(3000, ()=> {
     console.log("server is running on port 3000")
