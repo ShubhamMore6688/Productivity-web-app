@@ -11,10 +11,12 @@ app.use(cookieParser());
 config({
   path: "./config/config.env"
 });
+// Enable CORS for specific frontend URL
 app.use(cors({
-    origin: 'https://productivity-web-app-frontend.vercel.app', 
-    credentials: true 
-  }));
+  origin: 'https://productivity-web-app-frontend.vercel.app', // Replace with your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+}));
   
 connectDB();
 app.use(express.json());
